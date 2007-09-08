@@ -6,7 +6,7 @@
 Summary:	Mod_put is a DSO module for the apache web server
 Name:		apache-%{mod_name}
 Version:	2.0.8
-Release:	%mkrel 2
+Release:	%mkrel 3
 Group:		System/Servers
 License:	Apache License
 URL:		http://www.gknw.at/development/apache/
@@ -20,8 +20,6 @@ Requires:	apache-conf >= 2.2.0
 Requires:	apache >= 2.2.0
 BuildRequires:	apache-devel >= 2.2.0
 BuildRequires:	file
-Provides:	apache2-mod_put
-Obsoletes:	apache2-mod_put
 Epoch:		1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 

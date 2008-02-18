@@ -3,7 +3,7 @@
 %define mod_conf 96_%{mod_name}.conf
 %define mod_so %{mod_name}.so
 
-Summary:	Mod_put is a DSO module for the apache web server
+Summary:	DSO module for the apache web server
 Name:		apache-%{mod_name}
 Version:	2.0.8
 Release:	%mkrel 3

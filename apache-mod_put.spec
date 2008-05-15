@@ -5,13 +5,13 @@
 
 Summary:	DSO module for the apache web server
 Name:		apache-%{mod_name}
-Version:	2.0.8
-Release:	%mkrel 5
+Version:	2.0.9
+Release:	%mkrel 1
 Group:		System/Servers
 License:	Apache License
-URL:		http://www.gknw.at/development/apache/
-Source0: 	http://www.gknw.at/development/apache/httpd-2.0/unix/modules/%{mod_name}-%{version}.tar.bz2
-Source1:	%{mod_conf}.bz2
+URL:		http://www.gknw.net/development/apache/
+Source0: 	http://www.gknw.net/development/apache/httpd-2.0/unix/modules/%{mod_name}-%{version}.tar.gz
+Source1:	%{mod_conf}
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 Requires(pre):	apache-conf >= 2.2.0
@@ -32,6 +32,8 @@ hole to activate them without securing the web server.
 
 %setup -q -n %{mod_name}-%{version}
 
+cp %{SOURCE1} %{mod_conf}
+
 # fix strange perms
 chmod 644 *
 
@@ -44,16 +46,13 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 %{_sbindir}/apxs -c %{mod_name}.c
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 install -d %{buildroot}%{_libdir}/apache-extramodules
 install -d %{buildroot}%{_sysconfdir}/httpd/modules.d
 
 install -m0755 .libs/*.so %{buildroot}%{_libdir}/apache-extramodules/
-bzcat %{SOURCE1} > %{buildroot}%{_sysconfdir}/httpd/modules.d/%{mod_conf}
-
-install -d %{buildroot}%{_var}/www/html/addon-modules
-ln -s ../../../..%{_docdir}/%{name}-%{version} %{buildroot}%{_var}/www/html/addon-modules/%{name}-%{version}
+install -m0644 %{mod_conf} %{buildroot}%{_sysconfdir}/httpd/modules.d/
 
 %post
 if [ -f %{_var}/lock/subsys/httpd ]; then
@@ -68,13 +67,10 @@ if [ "$1" = "0" ]; then
 fi
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 %doc mod_put.html my_cfg.txt
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/modules.d/%{mod_conf}
 %attr(0755,root,root) %{_libdir}/apache-extramodules/%{mod_so}
-%{_var}/www/html/addon-modules/*
-
-

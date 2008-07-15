@@ -3,7 +3,7 @@
 %define mod_conf 96_%{mod_name}.conf
 %define mod_so %{mod_name}.so
 
-Summary:	DSO module for the apache web server
+Summary:	Apache module that implement DELETE and PUT http methods
 Name:		apache-%{mod_name}
 Version:	2.0.9
 Release:	%mkrel 3

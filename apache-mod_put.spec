@@ -6,7 +6,7 @@
 Summary:	Apache module that implement DELETE and PUT http methods
 Name:		apache-%{mod_name}
 Version:	2.0.9
-Release:	9
+Release:	10
 Group:		System/Servers
 License:	Apache License
 URL:		http://www.gknw.net/development/apache/

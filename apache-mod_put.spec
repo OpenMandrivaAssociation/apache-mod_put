@@ -9,7 +9,7 @@ Version:	2.0.9
 Release:	10
 Group:		System/Servers
 License:	Apache License
-URL:		http://www.gknw.net/development/apache/
+URL:		https://www.gknw.net/development/apache/
 Source0: 	http://www.gknw.net/development/apache/httpd-2.0/unix/modules/%{mod_name}-%{version}.tar.gz
 Source1:	%{mod_conf}
 Requires(pre): rpm-helper
